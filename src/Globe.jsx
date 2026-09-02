@@ -5,7 +5,14 @@ import { useState, useMemo } from "react";
 
 Ion.defaultAccessToken = import.meta.env.VITE_CESIUM_TOKEN;
 
-export default function Globe() {
+const VARIABLE_UNITS = {
+  temperature: "°C",
+  salinity: "PSU",
+  chlorophyll: "mg/m³",
+  current: "m/s",
+};
+
+export default function Globe({ variable, depth, colorbar }) {
   const gibsProvider = useMemo(() => {
     return new WebMapTileServiceImageryProvider({
       url:
@@ -22,6 +29,14 @@ export default function Globe() {
   }, []);
 
   const [showGibs, setShowGibs] = useState(true);
+
+  // Placeholder — will drive real data-layer rendering once the
+  // FastAPI backend (or demo data) is wired in for Phase 3/4.
+  console.log(
+    `Active layer request → variable: ${variable} | depth: ${depth}m | ` +
+    `color range: ${colorbar.min}${VARIABLE_UNITS[variable]} to ${colorbar.max}${VARIABLE_UNITS[variable]} | ` +
+    `palette: ${colorbar.palette} | opacity: ${colorbar.opacity} | log scale: ${colorbar.logScale}`
+  );
 
   return (
     <>
