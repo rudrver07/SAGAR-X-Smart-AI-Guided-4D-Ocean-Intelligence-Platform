@@ -12,6 +12,8 @@ export default function Controls({
   setColorbar,
   variable,
   setVariable,
+  verticalExaggeration,
+  setVerticalExaggeration,
 }) {
   return (
     <div className="sagarx-controls">
@@ -37,6 +39,20 @@ export default function Controls({
           step={1}
           value={DEPTH_LEVELS.indexOf(depth)}
           onChange={(e) => setDepth(DEPTH_LEVELS[Number(e.target.value)])}
+        />
+      </div>
+
+      <div className="sagarx-field">
+        <label>
+          Vertical Exaggeration <span className="value">{verticalExaggeration}x</span>
+        </label>
+        <input
+          type="range"
+          min={1}
+          max={20}
+          step={1}
+          value={verticalExaggeration}
+          onChange={(e) => setVerticalExaggeration(Number(e.target.value))}
         />
       </div>
 
