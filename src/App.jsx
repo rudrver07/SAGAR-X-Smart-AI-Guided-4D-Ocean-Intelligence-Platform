@@ -14,7 +14,12 @@ export default function App() {
     logScale: false,
   });
   const [verticalExaggeration, setVerticalExaggeration] = useState(1);
-  const [selectedFloat, setSelectedFloat] = useState(null);
+  const [selectedInstrument, setSelectedInstrument] = useState(null);
+  const [lastUpdated, setLastUpdated] = useState({ argo: null, glider: null });
+
+  const handleDataUpdated = (source, time) => {
+    setLastUpdated((prev) => ({ ...prev, [source]: time }));
+  };
 
   return (
     <>
@@ -23,7 +28,9 @@ export default function App() {
         depth={depth}
         colorbar={colorbar}
         verticalExaggeration={verticalExaggeration}
-        onSelectFloat={setSelectedFloat}
+        onSelectFloat={setSelectedInstrument}
+        onSelectGlider={setSelectedInstrument}
+        onDataUpdated={handleDataUpdated}
       />
       <Controls
         variable={variable}
@@ -34,8 +41,9 @@ export default function App() {
         setColorbar={setColorbar}
         verticalExaggeration={verticalExaggeration}
         setVerticalExaggeration={setVerticalExaggeration}
+        lastUpdated={lastUpdated}
       />
-      <ProfilePanel float={selectedFloat} onClose={() => setSelectedFloat(null)} />
+      <ProfilePanel float={selectedInstrument} onClose={() => setSelectedInstrument(null)} />
     </>
   );
 }

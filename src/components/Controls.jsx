@@ -14,10 +14,17 @@ export default function Controls({
   setVariable,
   verticalExaggeration,
   setVerticalExaggeration,
+  lastUpdated,
 }) {
   return (
     <div className="sagarx-controls">
       <h3>SAGAR-X Controls</h3>
+
+      <p className="sagarx-live-status">
+        Argo: {lastUpdated.argo ? lastUpdated.argo.toLocaleTimeString() : "loading..."}
+        {" · "}
+        Glider: {lastUpdated.glider ? lastUpdated.glider.toLocaleTimeString() : "loading..."}
+      </p>
 
       <div className="sagarx-field">
         <label>Variable</label>

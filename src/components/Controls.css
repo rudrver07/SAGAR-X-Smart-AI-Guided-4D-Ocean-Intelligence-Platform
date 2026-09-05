@@ -131,3 +131,9 @@
   accent-color: #4fd1ff;
   cursor: pointer;
 }
+
+.sagarx-live-status {
+  font-size: 10px;
+  color: #7fbf7f;
+  margin: -6px 0 14px;
+}
