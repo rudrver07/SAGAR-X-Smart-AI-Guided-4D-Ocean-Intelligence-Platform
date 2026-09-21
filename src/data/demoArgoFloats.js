@@ -1,0 +1,43 @@
+// DEMO DATA — NOT REAL OBSERVATION
+export const DEMO_ARGO_FLOATS = [
+  {
+    id: "ARGO-2900123",
+    region: "Arabian Sea",
+    lat: 15.2,
+    lon: 68.4,
+    timestamp: "2026-08-30T06:00:00Z",
+    depths: [0, 50, 100, 200, 500, 1000],
+    temperature: [29.1, 27.8, 24.5, 18.2, 10.4, 6.1],
+    salinity: [36.2, 36.1, 35.9, 35.6, 35.2, 34.9],
+  },
+  {
+    id: "ARGO-2900456",
+    region: "Bay of Bengal",
+    lat: 12.9,
+    lon: 88.1,
+    timestamp: "2026-08-29T18:00:00Z",
+    depths: [0, 50, 100, 200, 500, 1000],
+    temperature: [28.4, 26.9, 22.1, 16.5, 9.8, 5.7],
+    salinity: [33.8, 34.0, 34.4, 34.9, 35.1, 35.0],
+  },
+  {
+    id: "ARGO-2900789",
+    region: "Off Kerala Coast",
+    lat: 8.5,
+    lon: 76.9,
+    timestamp: "2026-08-30T00:00:00Z",
+    depths: [0, 50, 100, 200, 500, 1000],
+    temperature: [29.6, 28.0, 25.2, 19.0, 11.1, 6.4],
+    salinity: [35.0, 35.1, 35.5, 35.7, 35.3, 35.0],
+  },
+  {
+    id: "ARGO-2901022",
+    region: "Off Mumbai Coast",
+    lat: 18.7,
+    lon: 71.2,
+    timestamp: "2026-08-29T12:00:00Z",
+    depths: [0, 50, 100, 200, 500, 1000],
+    temperature: [28.9, 27.1, 23.4, 17.6, 10.0, 5.9],
+    salinity: [36.5, 36.4, 36.0, 35.7, 35.3, 35.0],
+  },
+];
