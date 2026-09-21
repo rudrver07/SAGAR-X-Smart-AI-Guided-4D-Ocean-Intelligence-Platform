@@ -1,0 +1,202 @@
+.sagarx-analysis-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(4, 8, 16, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 2100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.sagarx-analysis-modal {
+  width: 780px;
+  max-width: 95vw;
+  max-height: 90vh;
+  background: linear-gradient(165deg, rgba(14, 22, 38, 0.96), rgba(8, 12, 22, 0.98));
+  border: 1px solid rgba(255, 183, 3, 0.4);
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 183, 3, 0.15);
+  color: #e2f1ff;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+.sagarx-analysis-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 22px;
+  background: rgba(255, 183, 3, 0.08);
+  border-bottom: 1px solid rgba(255, 183, 3, 0.2);
+}
+
+.sagarx-analysis-header .header-title h2 {
+  margin: 0;
+  font-size: 17px;
+  color: #ffb703;
+  font-weight: 700;
+}
+
+.sagarx-analysis-header .header-title .subtitle {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.sagarx-analysis-tabs {
+  display: flex;
+  gap: 6px;
+  padding: 10px 20px;
+  background: rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  overflow-x: auto;
+}
+
+.sagarx-analysis-tabs .tab-btn {
+  padding: 6px 14px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #a9b4c4;
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.sagarx-analysis-tabs .tab-btn:hover {
+  background: rgba(255, 183, 3, 0.15);
+  color: #ffffff;
+}
+
+.sagarx-analysis-tabs .tab-btn.active {
+  background: linear-gradient(90deg, #ffb703, #ff8800);
+  color: #0b111e;
+  border-color: #ffb703;
+  font-weight: 700;
+  box-shadow: 0 0 12px rgba(255, 183, 3, 0.4);
+}
+
+.sagarx-analysis-body {
+  padding: 18px 22px;
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.var-switcher-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.var-btn-group {
+  display: flex;
+  gap: 6px;
+}
+
+.var-btn {
+  padding: 5px 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #c4d4e4;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.var-btn.active {
+  background: rgba(79, 209, 255, 0.25);
+  border-color: #4fd1ff;
+  color: #4fd1ff;
+  font-weight: 600;
+}
+
+.center-btn {
+  background: rgba(0, 180, 216, 0.2);
+  border: 1px solid rgba(0, 180, 216, 0.4);
+  color: #7ee8fa;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.center-btn:hover {
+  background: rgba(0, 180, 216, 0.4);
+  color: #ffffff;
+}
+
+.graph-container {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.graph-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #e2f1ff;
+  margin-bottom: 10px;
+}
+
+.source-tag {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: normal;
+}
+
+.diagnostics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.diag-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.diag-label {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.diag-val {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffb703;
+}
+
+.diag-val.bias {
+  color: #39ff14;
+}
+
+.diag-val.rmse {
+  color: #4fd1ff;
+}

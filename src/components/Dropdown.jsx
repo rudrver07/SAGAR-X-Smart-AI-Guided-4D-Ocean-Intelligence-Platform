@@ -5,7 +5,6 @@ export default function Dropdown({ label, value, options, onChange }) {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
 
-  // Close the dropdown if the user clicks anywhere outside it
   useEffect(() => {
     function handleClickOutside(e) {
       if (ref.current && !ref.current.contains(e.target)) {
@@ -18,6 +17,7 @@ export default function Dropdown({ label, value, options, onChange }) {
 
   return (
     <div className="sagarx-dropdown" ref={ref}>
+      {label && <label className="sagarx-dropdown-label">{label}</label>}
       <button
         type="button"
         className="sagarx-dropdown-trigger"

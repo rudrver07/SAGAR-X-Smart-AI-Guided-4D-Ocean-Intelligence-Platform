@@ -1,0 +1,118 @@
+.sagarx-layer-manager {
+  position: absolute;
+  top: 60px;
+  left: 20px;
+  z-index: 990;
+  width: 240px;
+  background: rgba(14, 22, 36, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(79, 209, 255, 0.25);
+  border-radius: 12px;
+  padding: 14px 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  color: #e2f1ff;
+}
+
+.sagarx-layer-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+
+.sagarx-layer-header h3 {
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: 0.8px;
+  color: #4fd1ff;
+}
+
+.sagarx-layer-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.sagarx-layer-section .section-title {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.sagarx-layer-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.sagarx-layer-item input[type="checkbox"] {
+  accent-color: #4fd1ff;
+  width: 14px;
+  height: 14px;
+}
+
+.indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.satellite-dot { background: #4fd1ff; }
+.model-dot { background: #ff7b00; }
+.current-dot { background: #00b4d8; }
+.pointer-dot { background: #ffb703; }
+.argo-dot { background: #00ffff; }
+.glider-dot { background: #ffaa00; }
+.ctd-dot { background: #b5179e; }
+.bgc-dot { background: #39ff14; }
+
+.layer-button-group {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.layer-analysis-btn {
+  flex: 1;
+  padding: 6px 8px;
+  background: linear-gradient(90deg, rgba(255, 183, 3, 0.15), rgba(255, 136, 0, 0.25));
+  border: 1px solid rgba(255, 183, 3, 0.35);
+  color: #ffb703;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.layer-analysis-btn:hover {
+  background: rgba(255, 183, 3, 0.3);
+  color: #ffffff;
+}
+
+.layer-ocean-info-btn {
+  flex: 1;
+  padding: 6px 8px;
+  background: linear-gradient(90deg, rgba(79, 209, 255, 0.15), rgba(0, 180, 216, 0.25));
+  border: 1px solid rgba(79, 209, 255, 0.35);
+  color: #7ee8fa;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.layer-ocean-info-btn:hover {
+  background: rgba(79, 209, 255, 0.3);
+  color: #ffffff;
+}

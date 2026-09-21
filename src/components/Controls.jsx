@@ -1,21 +1,26 @@
 import "./Controls.css";
 import Dropdown from "./Dropdown";
+import DataSourceBadge from "./DataSourceBadge";
+import { useOcean } from "../context/OceanContext";
+import { DEPTH_LEVELS } from "../constants/oceanConstants";
 
-const DEPTH_LEVELS = [0, 100, 200, 500, 1000];
 const PALETTES = ["Viridis", "Thermal", "Rainbow", "Grayscale"];
 const VARIABLES = ["temperature", "salinity", "chlorophyll", "current"];
 
-export default function Controls({
-  depth,
-  setDepth,
-  colorbar,
-  setColorbar,
-  variable,
-  setVariable,
-  verticalExaggeration,
-  setVerticalExaggeration,
-  lastUpdated,
-}) {
+export default function Controls() {
+  const {
+    variable,
+    setVariable,
+    depth,
+    setDepth,
+    colorbar,
+    setColorbar,
+    verticalExaggeration,
+    setVerticalExaggeration,
+    lastUpdated,
+    oceanMetadata,
+  } = useOcean();
+
   return (
     <div className="sagarx-controls">
       <h3>SAGAR-X Controls</h3>
@@ -24,6 +29,8 @@ export default function Controls({
         Argo: {lastUpdated.argo ? lastUpdated.argo.toLocaleTimeString() : "loading..."}
         {" · "}
         Glider: {lastUpdated.glider ? lastUpdated.glider.toLocaleTimeString() : "loading..."}
+        {" · "}
+        Currents: {lastUpdated.current ? lastUpdated.current.toLocaleTimeString() : "live"}
       </p>
 
       <div className="sagarx-field">
@@ -44,7 +51,7 @@ export default function Controls({
           min={0}
           max={DEPTH_LEVELS.length - 1}
           step={1}
-          value={DEPTH_LEVELS.indexOf(depth)}
+          value={DEPTH_LEVELS.indexOf(depth) >= 0 ? DEPTH_LEVELS.indexOf(depth) : 0}
           onChange={(e) => setDepth(DEPTH_LEVELS[Number(e.target.value)])}
         />
       </div>
@@ -113,6 +120,12 @@ export default function Controls({
         />
         Log scale
       </label>
+
+      <DataSourceBadge
+        metadata={oceanMetadata}
+        depth={depth}
+        variable={variable}
+      />
     </div>
   );
 }

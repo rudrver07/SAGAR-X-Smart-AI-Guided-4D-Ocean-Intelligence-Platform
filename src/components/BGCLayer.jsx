@@ -5,34 +5,27 @@ import { useOcean } from "../context/OceanContext";
 
 const BACKEND_URL = "http://localhost:8000";
 
-export default function ArgoLayer() {
+export default function BGCLayer() {
   const { viewer } = useCesium();
   const { layers, setSelectedPlatform, handleDataUpdated } = useOcean();
   const [floats, setFloats] = useState([]);
 
-  const isLayerActive = layers.argo;
+  const isLayerActive = layers.bgc;
 
   useEffect(() => {
     if (!isLayerActive) return;
 
     let isMounted = true;
-    const fetchFloats = () => {
-      fetch(`${BACKEND_URL}/observations/argo`)
-        .then((res) => res.json())
-        .then((data) => {
-          if (!isMounted) return;
-          setFloats(data.floats || []);
-          handleDataUpdated("argo", new Date());
-        })
-        .catch((err) => console.error("Failed to load Argo data:", err));
-    };
+    fetch(`${BACKEND_URL}/observations/bgc`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (!isMounted) return;
+        setFloats(data.floats || []);
+        handleDataUpdated("bgc", new Date());
+      })
+      .catch((err) => console.error("Failed to load BGC observations:", err));
 
-    fetchFloats();
-    const interval = setInterval(fetchFloats, 5 * 60 * 1000);
-    return () => {
-      isMounted = false;
-      clearInterval(interval);
-    };
+    return () => { isMounted = false; };
   }, [isLayerActive, handleDataUpdated]);
 
   useEffect(() => {
@@ -41,13 +34,16 @@ export default function ArgoLayer() {
     const handler = new ScreenSpaceEventHandler(viewer.scene.canvas);
     handler.setInputAction((click) => {
       const picked = viewer.scene.pick(click.position);
-      if (defined(picked) && picked.id && picked.id.id && picked.id.id.startsWith("argo-")) {
-        const floatId = picked.id.id.replace("argo-", "");
-        const float = floats.find((f) => f.id === floatId);
+      if (defined(picked) && picked.id && picked.id.id && picked.id.id.startsWith("bgc-")) {
+        const floatId = picked.id.id.replace("bgc-", "");
+        const float = floats.find((f) => f.platformId === floatId);
         if (float) {
           setSelectedPlatform({
             ...float,
-            platformType: "ARGO",
+            id: float.platformId,
+            region: `BGC Float (${float.platformId})`,
+            lat: float.latitude,
+            lon: float.longitude,
           });
         }
       }
@@ -60,15 +56,15 @@ export default function ArgoLayer() {
 
   return (
     <>
-      {floats.map((float) => (
+      {floats.map((f) => (
         <Entity
-          key={float.id}
-          id={`argo-${float.id}`}
-          name={float.id}
-          position={Cartesian3.fromDegrees(float.lon, float.lat)}
+          key={f.platformId}
+          id={`bgc-${f.platformId}`}
+          name={f.platformId}
+          position={Cartesian3.fromDegrees(f.longitude, f.latitude)}
           point={{
-            pixelSize: 12,
-            color: Color.CYAN,
+            pixelSize: 13,
+            color: Color.LIME,
             outlineColor: Color.WHITE,
             outlineWidth: 2,
           }}

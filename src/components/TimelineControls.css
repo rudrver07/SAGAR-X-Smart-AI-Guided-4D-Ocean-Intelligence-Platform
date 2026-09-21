@@ -1,0 +1,124 @@
+.sagarx-timeline-panel {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 990;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(14, 22, 36, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(79, 209, 255, 0.25);
+  border-radius: 12px;
+  padding: 10px 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  color: #e2f1ff;
+  width: min(650px, 90vw);
+}
+
+.sagarx-timeline-buttons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sagarx-timeline-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #4fd1ff;
+  border-radius: 6px;
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.sagarx-timeline-btn:hover {
+  background: rgba(79, 209, 255, 0.2);
+  border-color: #4fd1ff;
+}
+
+.sagarx-timeline-btn.play-btn {
+  background: rgba(79, 209, 255, 0.2);
+  border-color: #4fd1ff;
+  font-size: 16px;
+}
+
+.sagarx-timeline-btn.play-btn.playing {
+  background: rgba(255, 138, 138, 0.2);
+  border-color: #ff8a8a;
+  color: #ff8a8a;
+}
+
+.sagarx-timeline-slider-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sagarx-timeline-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+
+.sagarx-time-badge {
+  color: #4fffb0;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  background: #4fffb0;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #4fffb0;
+  animation: pulse-dot 1.8s infinite;
+}
+
+@keyframes pulse-dot {
+  0% { opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+
+.sagarx-step-count {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.sagarx-timeline-slider {
+  width: 100%;
+  accent-color: #4fd1ff;
+  cursor: pointer;
+}
+
+.sagarx-speed-selector {
+  display: flex;
+  gap: 4px;
+}
+
+.sagarx-speed-selector button {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.sagarx-speed-selector button.active {
+  background: #4fd1ff;
+  color: #0b111e;
+  font-weight: 600;
+}

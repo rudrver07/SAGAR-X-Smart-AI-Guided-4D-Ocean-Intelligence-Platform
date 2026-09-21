@@ -1,40 +1,55 @@
 import { useEffect, useState, Fragment } from "react";
 import { Entity, useCesium } from "resium";
-import {
-  Cartesian3,
-  Color,
-  PolylineDashMaterialProperty,
-  ScreenSpaceEventHandler,
-  ScreenSpaceEventType,
-  defined,
-} from "cesium";
+import { Cartesian3, Color, PolylineDashMaterialProperty, ScreenSpaceEventHandler, ScreenSpaceEventType, defined } from "cesium";
+import { useOcean } from "../context/OceanContext";
 
-export default function GliderLayer({ onSelectGlider }) {
+const BACKEND_URL = "http://localhost:8000";
+
+export default function GliderLayer() {
   const { viewer } = useCesium();
+  const { layers, setSelectedPlatform, handleDataUpdated } = useOcean();
   const [gliders, setGliders] = useState([]);
 
-  useEffect(() => {
-    fetch("http://localhost:8000/observations/glider")
-      .then((res) => res.json())
-      .then((data) => setGliders(data.gliders || []))
-      .catch((err) => console.error("Failed to load glider data:", err));
-  }, []);
+  const isLayerActive = layers.glider;
 
   useEffect(() => {
-    if (!viewer) return;
+    if (!isLayerActive) return;
+
+    let isMounted = true;
+    fetch(`${BACKEND_URL}/observations/glider`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (!isMounted) return;
+        setGliders(data.gliders || []);
+        handleDataUpdated("glider", new Date());
+      })
+      .catch((err) => console.error("Failed to load glider data:", err));
+
+    return () => { isMounted = false; };
+  }, [isLayerActive, handleDataUpdated]);
+
+  useEffect(() => {
+    if (!viewer || !isLayerActive) return;
 
     const handler = new ScreenSpaceEventHandler(viewer.scene.canvas);
-
     handler.setInputAction((click) => {
       const picked = viewer.scene.pick(click.position);
-      if (defined(picked) && picked.id && picked.id.id) {
-        const glider = gliders.find((g) => g.id === picked.id.id);
-        if (glider) onSelectGlider(glider);
+      if (defined(picked) && picked.id && picked.id.id && picked.id.id.startsWith("glider-")) {
+        const gliderId = picked.id.id.replace("glider-", "");
+        const glider = gliders.find((g) => g.id === gliderId);
+        if (glider) {
+          setSelectedPlatform({
+            ...glider,
+            platformType: "GLIDER",
+          });
+        }
       }
     }, ScreenSpaceEventType.LEFT_CLICK);
 
     return () => handler.destroy();
-  }, [viewer, gliders, onSelectGlider]);
+  }, [viewer, isLayerActive, gliders, setSelectedPlatform]);
+
+  if (!isLayerActive) return null;
 
   return (
     <>
@@ -43,7 +58,6 @@ export default function GliderLayer({ onSelectGlider }) {
 
         return (
           <Fragment key={glider.id}>
-            {/* Trajectory path — dashed amber line showing where the glider has traveled */}
             <Entity
               polyline={{
                 positions: Cartesian3.fromDegreesArray(trajectoryPositions),
@@ -56,9 +70,8 @@ export default function GliderLayer({ onSelectGlider }) {
               }}
             />
 
-            {/* Current position marker — distinct orange point vs Argo's cyan */}
             <Entity
-              id={glider.id}
+              id={`glider-${glider.id}`}
               name={glider.id}
               position={Cartesian3.fromDegrees(glider.lon, glider.lat)}
               point={{
